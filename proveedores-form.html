@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Proveedores - Frutería</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Barra de navegación -->
+    <nav class="bg-green-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="panel-control.html" class="flex items-center">
+                        <i class="fas fa-apple-alt text-2xl mr-2"></i>
+                        <span class="font-bold text-xl">Frutería El Huerto</span>
+                    </a>
+                </div>
+                <div>
+                    <button onclick="location.href='panel-control.html'" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg mr-2">
+                        <i class="fas fa-home mr-2"></i>Panel
+                    </button>
+                    <button onclick="location.href='logout.php'" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 mt-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Gestión de Proveedores</h1>
+            <button onclick="mostrarFormulario()" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                <i class="fas fa-plus mr-2"></i>Nuevo Proveedor
+            </button>
+        </div>
+
+        <!-- Formulario de proveedor (oculto por defecto) -->
+        <div id="formularioProveedor" class="hidden bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Agregar Nuevo Proveedor</h2>
+            <form action="guardar_proveedor.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">
+                        Nombre
+                    </label>
+                    <input type="text" id="nombre" name="nombre" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="contacto">
+                        Contacto
+                    </label>
+                    <input type="text" id="contacto" name="contacto" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="telefono">
+                        Teléfono
+                    </label>
+                    <input type="tel" id="telefono" name="telefono" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                        Email
+                    </label>
+                    <input type="email" id="email" name="email" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="pais">
+                        País
+                    </label>
+                    <input type="text" id="pais" name="pais" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="direccion">
+                        Dirección
+                    </label>
+                    <input type="text" id="direccion" name="direccion" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="descripcion">
+                        Descripción
+                    </label>
+                    <textarea id="descripcion" name="descripcion" rows="3"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                </div>
+                <div class="md:col-span-2 flex justify-end space-x-4">
+                    <button type="button" onclick="ocultarFormulario()" 
+                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Guardar Proveedor
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabla de proveedores -->
+        <div class="bg-white rounded-lg shadow-md overflow-x-auto">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">País</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Las filas se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function mostrarFormulario() {
+            document.getElementById('formularioProveedor').classList.remove('hidden');
+        }
+
+        function ocultarFormulario() {
+            document.getElementById('formularioProveedor').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

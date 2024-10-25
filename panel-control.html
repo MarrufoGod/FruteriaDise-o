@@ -35,12 +35,37 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-green-100 text-green-600">
-                        <i class="fas fa-fruit text-2xl"></i>
+                        <i class="fas fa-apple-alt text-4xl"></i>
                     </div>
                     <div class="ml-4">
                         <p class="text-sm text-gray-500">Total Productos</p>
-                        <p class="text-2xl font-semibold">25</p>
+                        <p id="totalProductos" class="text-2xl font-semibold">Cargando...</p>
                     </div>
+                    
+                    <script>
+                        // Realizar la solicitud a la API
+                        fetch('https://localhost:7132/api/Producto')
+                            .then(response => response.json())
+                            .then(data => {
+                                // Obtener la cantidad total de productos
+                                const totalProductos = data.length;
+                    
+                                // Seleccionar el elemento donde se mostrará el total de productos
+                                const totalProductosElement = document.getElementById('totalProductos');
+                    
+                                // Actualizar el contenido del elemento con el número de productos
+                                totalProductosElement.textContent = totalProductos;
+                            })
+                            .catch(error => {
+                                // Manejar el error e informar al usuario
+                                console.error('Error:', error);
+                    
+                                // Mostrar un mensaje de error en lugar del número de productos
+                                const totalProductosElement = document.getElementById('totalProductos');
+                                totalProductosElement.textContent = 'Error al cargar';
+                            });
+                    </script>
+                    
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md p-6">
@@ -50,8 +75,31 @@
                     </div>
                     <div class="ml-4">
                         <p class="text-sm text-gray-500">Total Proveedores</p>
-                        <p class="text-2xl font-semibold">8</p>
+                        <p id="totalProveedores" class="text-2xl font-semibold">Cargando...</p>
                     </div>
+                    <script>
+                        // Realizar la solicitud a la API
+                        fetch('https://localhost:7132/api/Proveedor')
+                            .then(response => response.json())
+                            .then(data => {
+                                // Obtener la cantidad total de productos
+                                const totalProveedores = data.length;
+                    
+                                // Seleccionar el elemento donde se mostrará el total de productos
+                                const totalProveedoresElement = document.getElementById('totalProveedores');
+                    
+                                // Actualizar el contenido del elemento con el número de productos
+                                totalProveedoresElement.textContent = totalProveedores;
+                            })
+                            .catch(error => {
+                                // Manejar el error e informar al usuario
+                                console.error('Error:', error);
+                    
+                                // Mostrar un mensaje de error en lugar del número de productos
+                                const totalProveedoresElement = document.getElementById('totalProveedores');
+                                totalProveedoresElement.textContent = 'Error al cargar';
+                            });
+                    </script>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md p-6">
@@ -61,7 +109,7 @@
                     </div>
                     <div class="ml-4">
                         <p class="text-sm text-gray-500">Stock Total</p>
-                        <p class="text-2xl font-semibold">1,250</p>
+                        <p id="totalFrutas" class="text-2xl font-semibold">Cargando...</p>
                     </div>
                 </div>
             </div>
@@ -93,5 +141,26 @@
             </a>
         </div>
     </div>
+    <script>
+        function mostrarFormulario() {
+            document.getElementById('formularioFruta').classList.remove('hidden');
+        }
+
+        function ocultarFormulario() {
+            document.getElementById('formularioFruta').classList.add('hidden');
+        }
+
+        // Cargar y mostrar el total de frutas
+        fetch('https://localhost:7132/api/Producto')
+            .then(response => response.json())
+            .then(data => {
+                const totalFrutas = data.reduce((total, producto) => total + producto.cantidad, 0);
+                document.getElementById('totalFrutas').textContent = totalFrutas;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('totalFrutas').textContent = 'Error al cargar';
+            });
+    </script>
 </body>
 </html>

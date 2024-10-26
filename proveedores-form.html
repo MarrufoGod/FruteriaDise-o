@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Proveedores - Frutería</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
+
 <body class="bg-gray-100">
     <!-- Barra de navegación -->
     <nav class="bg-green-600 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <a href="panel-control.html" class="flex items-center">
-                        <i class="fas fa-apple-alt text-2xl mr-2"></i>
-                        <span class="font-bold text-xl">Frutería El Huerto</span>
-                    </a>
+                    <i class="fas fa-truck text-2xl mr-2"></i>
+                    <span class="font-bold text-xl">Frutería El Huerto</span>
                 </div>
                 <div>
                     <button onclick="location.href='panel-control.html'" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg mr-2">
@@ -33,75 +35,9 @@
     <div class="max-w-7xl mx-auto px-4 mt-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Gestión de Proveedores</h1>
-            <button onclick="mostrarFormulario()" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#modalNuevoProveedor" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
                 <i class="fas fa-plus mr-2"></i>Nuevo Proveedor
             </button>
-        </div>
-
-        <!-- Formulario de proveedor (oculto por defecto) -->
-        <div id="formularioProveedor" class="hidden bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-xl font-semibold mb-4">Agregar Nuevo Proveedor</h2>
-            <form action="guardar_proveedor.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">
-                        Nombre
-                    </label>
-                    <input type="text" id="nombre" name="nombre" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="contacto">
-                        Contacto
-                    </label>
-                    <input type="text" id="contacto" name="contacto" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="telefono">
-                        Teléfono
-                    </label>
-                    <input type="tel" id="telefono" name="telefono" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Email
-                    </label>
-                    <input type="email" id="email" name="email" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="pais">
-                        País
-                    </label>
-                    <input type="text" id="pais" name="pais" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="direccion">
-                        Dirección
-                    </label>
-                    <input type="text" id="direccion" name="direccion" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div class="md:col-span-2">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="descripcion">
-                        Descripción
-                    </label>
-                    <textarea id="descripcion" name="descripcion" rows="3"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-                </div>
-                <div class="md:col-span-2 flex justify-end space-x-4">
-                    <button type="button" onclick="ocultarFormulario()" 
-                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Cancelar
-                    </button>
-                    <button type="submit"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Guardar Proveedor
-                    </button>
-                </div>
-            </form>
         </div>
 
         <!-- Tabla de proveedores -->
@@ -109,11 +45,11 @@
             <table class="min-w-full table-auto">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">País</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                     </tr>
                 </thead>
@@ -124,14 +60,274 @@
         </div>
     </div>
 
+    <!-- Modal para Nuevo Proveedor -->
+    <div class="modal fade" id="modalNuevoProveedor" tabindex="-1" aria-labelledby="modalNuevoProveedorLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalNuevoProveedorLabel">Agregar Nuevo Proveedor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formNuevoProveedor">
+                        <div class="mb-3">
+                            <label for="nuevo-nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nuevo-nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevo-contacto" class="form-label">Contacto</label>
+                            <input type="text" class="form-control" id="nuevo-contacto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevo-telefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="nuevo-telefono" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevo-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="nuevo-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevo-direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="nuevo-direccion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevo-notas" class="form-label">Notas</label>
+                            <textarea class="form-control" id="nuevo-notas" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregarProveedor()">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Proveedor -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Proveedor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditProveedor">
+                        <input type="hidden" id="edit-id">
+                        <div class="mb-3">
+                            <label for="edit-nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="edit-nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-contacto" class="form-label">Contacto</label>
+                            <input type="text" class="form-control" id="edit-contacto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-telefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="edit-telefono" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="edit-email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="edit-direccion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-notas" class="form-label">Notas</label>
+                            <textarea class="form-control" id="edit-notas" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="editarProveedor()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Confirmar Eliminación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Eliminar Proveedor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este proveedor?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function mostrarFormulario() {
-            document.getElementById('formularioProveedor').classList.remove('hidden');
+        let deleteProviderId;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            cargarDatos();
+        });
+
+        async function cargarDatos() {
+            try {
+                const proveedoresResponse = await fetch('http://localhost:5229/api/Proveedor');
+                const proveedores = await proveedoresResponse.json();
+
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = ''; // Limpiar tabla antes de agregar nuevos datos
+
+                proveedores.forEach(proveedor => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${proveedor.id}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${proveedor.nombre}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${proveedor.contacto}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${proveedor.telefono}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${proveedor.email}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="text-blue-500 hover:text-blue-700" onclick="abrirModalEditar(${proveedor.id})"><i class="fas fa-edit"></i></button>
+                            <button class="text-red-500 hover:text-red-700" onclick="abrirModalEliminar(${proveedor.id})"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error cargando proveedores:', error);
+            }
         }
 
-        function ocultarFormulario() {
-            document.getElementById('formularioProveedor').classList.add('hidden');
+        async function agregarProveedor() {
+            const nombre = document.getElementById('nuevo-nombre').value;
+            const contacto = document.getElementById('nuevo-contacto').value;
+            const telefono = document.getElementById('nuevo-telefono').value;
+            const email = document.getElementById('nuevo-email').value;
+            const direccion = document.getElementById('nuevo-direccion').value;
+            const notas = document.getElementById('nuevo-notas').value;
+
+            const nuevoProveedor = {
+                nombre: nombre,
+                contacto: contacto,
+                direccion: direccion,
+                telefono: telefono,
+                email: email,
+                pais: "hola",
+                descripcion: notas
+                
+            };
+
+            try {
+                const response = await fetch('http://localhost:5229/api/Proveedor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(nuevoProveedor)
+                });
+
+                if (response.ok) {
+                    document.getElementById('formNuevoProveedor').reset();
+                    cargarDatos();
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('modalNuevoProveedor'));
+                    modal.hide();
+                }
+            } catch (error) {
+                console.error('Error agregando proveedor:', error);
+            }
         }
+
+        async function abrirModalEditar(id) {
+            try {
+                const response = await fetch(`http://localhost:5229/api/Proveedor/${id}`);
+                const proveedor = await response.json();
+
+                document.getElementById('edit-id').value = proveedor.id;
+                document.getElementById('edit-nombre').value = proveedor.nombre;
+                document.getElementById('edit-contacto').value = proveedor.contacto;
+                document.getElementById('edit-telefono').value = proveedor.telefono;
+                document.getElementById('edit-email').value = proveedor.email;
+                document.getElementById('edit-direccion').value = proveedor.direccion;
+                document.getElementById('edit-notas').value = proveedor.notas;
+
+                const modal = new bootstrap.Modal(document.getElementById('editModal'));
+                modal.show();
+            } catch (error) {
+                console.error('Error cargando proveedor para editar:', error);
+            }
+        }
+
+        async function editarProveedor() {
+            const id = parseInt(document.getElementById('edit-id').value); // Convierte el ID a entero
+            const nombre = document.getElementById('edit-nombre').value;
+            const contacto = document.getElementById('edit-contacto').value;
+            const telefono = document.getElementById('edit-telefono').value;
+            const email = document.getElementById('edit-email').value;
+            const direccion = document.getElementById('edit-direccion').value;
+            const notas = document.getElementById('edit-notas').value;
+
+            const proveedorEditado = {
+                
+                nombre: nombre,
+                contacto: contacto,
+                direccion: direccion,
+                telefono: telefono,
+                email: email,
+                pais: "hola",
+                descripcion: notas
+            };
+
+            console.log(proveedorEditado);
+
+            try {
+                const response = await fetch(`http://localhost:5229/api/Proveedor/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(proveedorEditado)
+                });
+
+                if (response.ok) {
+                    cargarDatos();
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                    modal.hide();
+                }
+            } catch (error) {
+                console.error('Error editando proveedor:', error);
+            }
+        }
+
+
+        function abrirModalEliminar(id) {
+            deleteProviderId = id; // Guardar el ID del proveedor a eliminar
+            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            modal.show();
+        }
+
+        async function eliminarProveedor() {
+            try {
+                const response = await fetch(`http://localhost:5229/api/Proveedor/${deleteProviderId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    cargarDatos();
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                    modal.hide();
+                }
+            } catch (error) {
+                console.error('Error eliminando proveedor:', error);
+            }
+        }
+
+        document.getElementById('confirmDeleteButton').onclick = eliminarProveedor;
     </script>
 </body>
+
 </html>
